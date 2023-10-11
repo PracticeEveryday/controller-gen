@@ -11,14 +11,14 @@ const runCommand = (command) => {
     return true;
 };
 
-const controllerName = process.argv[2];
+const moduleName = process.argv[2];
 
-const generateControllerFile = `node index.js ${controllerName}`;
-console.log(`generate controller file with filename: ${controllerName}`);
-const checkOut = runCommand(generateControllerFile);
+const generateCommand = `node index.js ${moduleName}`;
+console.log(`generate controller file with filename: ${moduleName}`);
+const checkOut = runCommand(generateCommand);
 if (!checkOut) process.exit(-1);
 
 
-console.log(`${controllerName}Controller.ts success`)
+console.log(`${moduleName}Controller.ts success`)
 
 
