@@ -1,9 +1,11 @@
 {
   "name": "nestjs-gen-mvc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "generate nestjs templates mvc pattern",
   "main": "index.js",
-  "bin": "./bin/index.js",
+  "bin": {
+    "nestjs-gen-mvc": "./bin/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
