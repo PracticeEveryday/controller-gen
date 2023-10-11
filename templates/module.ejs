@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { <%= capitalizedName%>>Controller } from './<%= capitalizedName%>Controller>';
-import { <%= capitalizedName%>>Service } from './<%= capitalizedName%>Service>';
+import { <%= capitalizedName%>Controller } from './<%= name%>.controller>';
+import { <%= capitalizedName%>Service } from './<%= name%>.service>';
 
 @Module({
-    controllers: [<%= capitalizedName%>>Controller],
-    providers: [<%= capitalizedName%>>Service],
+    controllers: [<%= capitalizedName%>Controller],
+    providers: [<%= capitalizedName%>Service],
 })
-export class <%= capitalizedName%>>Module {}
+export class <%= capitalizedName%>Module {}

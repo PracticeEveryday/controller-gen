@@ -8,14 +8,16 @@ const version = pack_json? pack_json.version : '<Unknown Version>'
 
 const args = process.argv.slice(2)
 
-const controllerName = args[0];
+const name = args[0];
 const capitalizedName = capitalize(args[0]);
 
-// EJS 템플릿 파일 'controller.ejs'를 읽습니다.
-const template = fs.readFileSync('./templates/controller.ejs', 'utf8');
 
-// EJS를 사용하여 동적으로 컨트롤러 내용을 생성합니다.
-const controllerContent = ejs.render(template, { name: controllerName, capitalizedName });
+
+// Define the templates directory
+const templatesDirectory = './templates';
+
+// Get a list of template files in the directory
+const templateFileArr = fs.readdirSync(templatesDirectory);
 
 const targetDirectory =  args[0];
 
@@ -24,10 +26,18 @@ if (!fs.existsSync(targetDirectory)) {
     fs.mkdirSync(targetDirectory);
 }
 
-const controllerFileName = `${targetDirectory}/${controllerName}.controller.ts`;
+templateFileArr.forEach((templateFile) => {
+    const template = fs.readFileSync(`./templates/${templateFile}`, 'utf8');
 
-fs.writeFileSync(controllerFileName, controllerContent);
-console.log(`Created ${controllerFileName}`);
+    const controllerContent = ejs.render(template, { name, capitalizedName });
+
+    const fileName = templateFile.split(".")[0]
+    const file = `${targetDirectory}/${name}.${fileName}.ts`;
+
+    fs.writeFileSync(file, controllerContent);
+    console.log(`Created ${file}`);
+})
+
 
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
