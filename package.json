@@ -1,11 +1,9 @@
 {
   "name": "controller-gen",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "controller generator project",
   "main": "index.js",
-  "bin": {
-    "c:gen": "index.js"
-  },
+  "bin": "./bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
