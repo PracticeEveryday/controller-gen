@@ -1,10 +1,11 @@
 import { Controller, Request, Param, Body, Get, Post, Put, Delete, ParseUUIDPipe } from "@nestjs/common";
 
 @Controller('/<%= name%>')
-export class <%= nameUpper%>Controller {
-    constructor (public readonly <%= name%>Service: <%= nameUpper%>Service) {}
+export class <%= capitalizedName%>Controller {
+    constructor (public readonly <%= name%>Service: <%= capitalizedName%>Service) {}
+
+    @Get('/')
+    public create(@Body() body: any) {
+        return this.<%= name%>Service.create(body);
+    }
 }
-
-
-
-

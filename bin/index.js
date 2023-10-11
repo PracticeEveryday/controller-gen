@@ -13,12 +13,6 @@ const runCommand = (command) => {
 
 const controllerName = process.argv[2];
 
-// const installControllerGen = `npm install controller-gen`;
-// console.log(`npm install controller-gen`);
-// const checkOut = runCommand(installControllerGen);
-// if (!checkOut) process.exit(-1);
-
-
 const generateControllerFile = `node index.js ${controllerName}`;
 console.log(`generate controller file with filename: ${controllerName}`);
 const checkOut = runCommand(generateControllerFile);

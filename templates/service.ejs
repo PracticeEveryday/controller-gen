@@ -1,0 +1,7 @@
+import { Injectable } from '@nestjs/core';
+import { <%= capitalizedName%>RepositoryInterface } from './interface/<%= capitalizedName%>RepositoryInterface';
+
+@Injectable()
+export class <%= capitalizedName%>Service {
+    constructor (public readonly <%= name%>Repository: <%= capitalizedName%>RepositoryInterface) {}
+}
