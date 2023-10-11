@@ -3,6 +3,7 @@
 const pack_json = require(__dirname + '/package.json');
 const fs = require('fs');
 const ejs = require('ejs');
+const path = require('path');
 
 const version = pack_json? pack_json.version : '<Unknown Version>'
 
@@ -11,13 +12,8 @@ const args = process.argv.slice(2)
 const name = args[0];
 const capitalizedName = capitalize(args[0]);
 
-
-
-// Define the templates directory
+const defaultPath = __dirname;
 const templatesDirectory = './templates';
-
-// Get a list of template files in the directory
-const templateFileArr = fs.readdirSync(templatesDirectory);
 
 const targetDirectory =  args[0];
 
@@ -25,20 +21,53 @@ const targetDirectory =  args[0];
 if (!fs.existsSync(targetDirectory)) {
     fs.mkdirSync(targetDirectory);
 }
+let isRoot = true;
 
-templateFileArr.forEach((templateFile) => {
-    const template = fs.readFileSync(`./templates/${templateFile}`, 'utf8');
+function processTemplateArr (dir) {
+    const fileArr = fs.readdirSync(dir);
 
-    const controllerContent = ejs.render(template, { name, capitalizedName });
+    fileArr.forEach((file) => {
+        const copyFile = file;
+        const filePath = path.join(dir, file);
+        const stats = fs.statSync(filePath);
 
-    const fileName = templateFile.split(".")[0]
-    const file = `${targetDirectory}/${name}.${fileName}.ts`;
+        if (stats.isDirectory()) {
+            isRoot = false;
 
-    fs.writeFileSync(file, controllerContent);
-    console.log(`Created ${file}`);
-})
+            const subDir = path.join(targetDirectory, file);
+            if (!fs.existsSync(subDir)) {
+                fs.mkdirSync(subDir);
+            }
 
+            // 폴더라면 재귀함수로 다시 진행
+            processTemplateArr(filePath);
+        } else {
+            // TODO: file을 왜 선언이 되어 있지 않을까?
+            // const template = fs.readFileSync(`./templates/${file}`, 'utf8');
 
+            const template = fs.readFileSync(`${defaultPath}/${dir}/${copyFile}`, 'utf8');
+
+            const content = ejs.render(template, {name, capitalizedName});
+
+            const fileName = copyFile.split(".").slice(0, -1).join(".");
+
+            let saveFilePath;
+            if(dir.startsWith(".")) {
+                saveFilePath = `${targetDirectory}/${name}.${fileName}.ts`;
+            } else {
+                const dirPath = dir.split("/").slice(1).join(".");
+                saveFilePath = `${targetDirectory}/${dirPath}/${name}.${fileName}.ts`;
+            }
+
+            fs.writeFileSync(saveFilePath, content);
+            console.log(`created ${file}`);
+        }
+    });
+}
+
+processTemplateArr(templatesDirectory);
+
+// --- Utils
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
