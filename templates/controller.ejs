@@ -1,0 +1,10 @@
+import { Controller, Request, Param, Body, Get, Post, Put, Delete, ParseUUIDPipe } from "@nestjs/common";
+
+@Controller('/<%= name%>')
+export class <%= nameUpper%>Controller {
+    constructor (public readonly <%= name%>Service: <%= nameUpper%>Service) {}
+}
+
+
+
+
