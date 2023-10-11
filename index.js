@@ -12,7 +12,6 @@ const args = process.argv.slice(2)
 const name = args[0];
 const capitalizedName = capitalize(args[0]);
 
-const defaultPath = __dirname;
 const templatesDirectoryPath = './templates';
 
 const targetDirectory =  args[0];
@@ -45,7 +44,7 @@ function processTemplateArr (dir) {
             // TODO: file을 왜 선언이 되어 있지 않을까?
             // const template = fs.readFileSync(`./templates/${file}`, 'utf8');
 
-            const template = fs.readFileSync(`${defaultPath}/${dir}/${copyFile}`, 'utf8');
+            const template = fs.readFileSync(`${dir}/${copyFile}`, 'utf8');
 
             const content = ejs.render(template, {name, capitalizedName});
 
