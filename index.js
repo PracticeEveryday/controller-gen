@@ -13,7 +13,7 @@ const name = args[0];
 const capitalizedName = capitalize(args[0]);
 
 const defaultPath = __dirname;
-const templatesDirectory = './templates';
+const templatesDirectoryPath = './templates';
 
 const targetDirectory =  args[0];
 
@@ -65,7 +65,7 @@ function processTemplateArr (dir) {
     });
 }
 
-processTemplateArr(templatesDirectory);
+processTemplateArr(templatesDirectoryPath);
 
 // --- Utils
 function capitalize(str) {
