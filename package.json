@@ -1,7 +1,7 @@
 {
-  "name": "controller-gen",
-  "version": "1.0.2",
-  "description": "controller generator project",
+  "name": "nestjs-gen-mvc",
+  "version": "1.0.1",
+  "description": "generate nestjs templates mvc pattern",
   "main": "index.js",
   "bin": "./bin/index.js",
   "scripts": {
