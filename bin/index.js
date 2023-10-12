@@ -13,7 +13,7 @@ const runCommand = (command) => {
 
 const moduleName = process.argv[2];
 
-const generateCommand = `node index.js ${moduleName}`;
+const generateCommand = `npx nestjs-gen-mvc ${moduleName}`;
 console.log(`generate controller file with filename: ${moduleName}`);
 const checkOut = runCommand(generateCommand);
 if (!checkOut) process.exit(-1);

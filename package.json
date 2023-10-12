@@ -1,6 +1,6 @@
 {
   "name": "nestjs-gen-mvc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "generate nestjs templates mvc pattern",
   "main": "index.js",
   "bin": {
